@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>运行监控</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap-table.css">
+
+	<script src="js/jquery.min.js"></script>
+
+	<script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<script src="js/bootstrap-table-zh-CN.min.js"></script>
+	
+	<script src="js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="js/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+	<script src="js/plugins/bootstrapValidator/bootstrapValidator.min.js"></script>
+		
+</head>
+<body>
+	
+	<div class="container-fluid">
+		<div class="row" style="height: 410px">
+		
+			<div class="span12">
+				
+				<div class="sub_sys" id="station">
+					<p class="text-center"><strong>地面站</strong></p>
+					<div class="text-center text-muted">接收文件:<span id="sta_file_num">28</span></div>
+					<div class="text-center text-muted">文件大小:<span id="sta_file_size">43.5</span>G</div>
+				</div>
+				
+				<div class="sub_sys" id="dts">
+					<p class="text-center"><strong>DTS</strong></p>
+					<div class="text-center text-muted">正在传输:<span id="dts_cur_trans_num">0</span></div>
+					<div class="text-center text-muted">接收成功:<span id="dts_save_success">28</span></div>
+					<div class="text-center text-muted">接收失败:<span id="dts_save_failure">0</span></div>
+					<div class="text-center text-muted">接收文件大小:<span id="dts_save_size">43.5</span>G</div>
+				</div>
+				
+				<div class="sub_sys" id="tsss">
+					<p class="text-center"><strong>TSSS</strong></p>
+					<div class="text-center text-muted">计划数:<span id="tsss_plan_num">28</span></div>
+					<div class="text-center text-muted">未启动:<span id="tsss_plan_pre_start">0</span></div>
+					<div class="text-center text-muted">已启动:<span id="tsss_plan_start">28</span></div>
+					<div class="text-center text-muted">已终止:<span id="tsss_plan_end">0</span></div>
+					<div class="text-center text-muted">已完成:<span id="tsss_plan_finished">28</span></div>
+				</div>
+				
+				<div class="sub_sys" id="dss">
+					<p class="text-center"><strong>DSS</strong></p>
+					<div class="text-center text-muted">订单数:<span id="dss_order_num">21</span></div>
+					<div class="text-center text-muted">已启动:<span id="dss_order_started">3</span></div>
+					<div class="text-center text-muted">已终止:<span id="dss_order_end"></span>0</div>
+					<div class="text-center text-muted">已完成:<span id="dss_order_finished">18</span></div>
+				</div>
+				
+				<div class="sub_sys" id="oms">
+					<p class="text-center"><strong>OMS</strong></p>
+					<div class="text-center text-muted">任务数:<span id="oms_task_num">49</span></div>
+					<div class="text-center text-muted">未启动:<span id="oms_task_pre_start">0</span></div>
+					<div class="text-center text-muted">已启动:<span id="oms_task_started">4</span>0</div>
+					<div class="text-center text-muted">已终止:<span id="oms_task_end">1</span></div>
+					<div class="text-center text-muted">已完成:<span id="oms_task_finished">44</span></div>
+					<div class="text-center text-muted">原始数据文件:<span id="oms_task_rawfile"></span>28</div>
+					<div class="text-center text-muted">数据产品数量:<span id="oms_task_product_size">44</span></div>
+					<div class="text-center text-muted">数据产品大小:<span id="oms_task_product_size">0</span></div>
+				</div>
+				
+				<div class="sub_sys" id="dss-trans">
+					<p class="text-center"><strong>用户服务</strong></p>
+					<div class="text-center text-muted">上传次数:<span id="dss_trans_num">132</span></div>
+					<div class="text-center text-muted">上传产品:<span id="dss_trans_product">279</span></div>
+					<div class="text-center text-muted">上传产品大小:<span id="dss_trans_product_size">115</span>G</div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="row" style="height:250px">
+			<div class="span12">
+				<table id="mytab" class="table table-hover"></table>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+var div = document.getElementById("station");
+var dragFlag = false;
+var x,y;
+
+var t = $("#mytab").bootstrapTable({
+		url: 'data/data_monitor_ims.json',
+		method: 'get',
+		dataType: "json",
+		striped: true, //设置为 true 会有隔行变色效果  
+		undefinedText: "空", //当数据为 undefined 时显示的字符  
+		pagination: true, //分页  
+		// paginationLoop:true,//设置为 true 启用分页条无限循环的功能。  
+		//showToggle: "true", //是否显示 切换试图（table/card）按钮  
+		//showColumns: "true", //是否显示 内容列下拉框  
+		pageNumber: 1, //如果设置了分页，首页页码  
+		// showPaginationSwitch:true,//是否显示 数据条数选择框  
+		pageSize: 5, //如果设置了分页，页面数据条数  
+		pageList: [5, 10, 20, 40], //如果设置了分页，设置可供选择的页面数据条数。设置为All 则显示所有记录。  
+		paginationPreText: '‹', //指定分页条中上一页按钮的图标或文字,这里是<  
+		paginationNextText: '›', //指定分页条中下一页按钮的图标或文字,这里是>  
+		// singleSelect: false,//设置True 将禁止多选  
+		search: false, //显示搜索框  
+		data_local: "zh-US", //表格汉化  
+		sidePagination: "server", //服务端处理分页  
+		queryParams: function(params) { //自定义参数，这里的参数是传给后台的，我这是是分页用的  
+			return { //这里的params是table提供的  
+				cp: params.offset, //从数据库第几条记录开始  
+				ps: params.limit //找多少条  
+			};
+		},
+		idField: "userId", //指定主键列  
+		columns: [{
+				title: '任务编号',
+				field: 'planid',
+				align: 'center'
+
+			}, {
+				title: '流程实例ID',
+				field: 'proinstid',
+				align: 'center'
+			}, {
+				title: '计划/订单ID',
+				field: 'omstaskid',
+				align: 'center'
+			}, {
+				title: '卫星型号',
+				field: 'satelliteid',
+				align: 'center'
+			}, {
+				title: '任务类型',
+				field: 'tasktype', //可以直接取到属性里面的属性，赞  
+				align: 'center'
+			},
+			{
+				title: '开始时间',
+				field: 'startime',
+				align: 'center',
+
+			}, {
+				title: '结束时间',
+				field: 'endtime',
+				align: 'center',
+
+			}, {
+				title: '任务耗时',
+				field: 'tasktime',
+				align: 'center',
+
+			},   {
+				title: '任务状态',
+				field: 'taskstatus',
+				align: 'center',
+
+			}
+
+		]
+	});
+	
+setStationData();
+setStaionFileSize();
+setDts();
+
+function setDts(){
+	window.setTimeout(function(){
+		$("#dts_cur_trans_num").html(1);
+		window.setInterval(function(){
+			var filesavedstr = $("#dts_save_size").html();
+			var filesavedsize = parseFloat(filesavedstr);
+			var newfilesavedsize = (filesavedsize + 0.1).toFixed(1);
+			$("#dts_save_size").html(newfilesavedsize);
+		},2000);
+	},1500);
+}
+
+
+function setStaionFileSize(){
+	window.setTimeout(
+		function(){
+			window.setInterval(function(){
+				var filesizeStr = $("#sta_file_size").html();
+				var filesize = parseFloat(filesizeStr);
+				var newfilesize = (filesize+0.1).toFixed(1);
+				$("#sta_file_size").html(newfilesize);
+				},1500);
+		},1000);
+}
+
+function setStationData(){
+	window.setTimeout(function(){
+		$("#sta_file_num").html(29);
+	},1000);
+}
+
+div.onmousedown = function (e) {
+    e = e || window.event;
+    x = e.clientX - div.offsetLeft;
+    y = e.clientY - div.offsetTop;
+    dragFlag = true;
+};
+ 
+document.onmousemove = function (e) {
+    if (dragFlag) {
+        e = e || window.event;
+        div.style.left = e.clientX - x + "px";
+        div.style.top  = e.clientY - y + "px";
+    }
+};
+ 
+document.onmouseup = function (e) {
+    dragFlag = false;
+};
+
+</script>
+<style type="text/css">
+ #station {
+    position: absolute;
+    left: 200px;
+    top: 160px;
+    width: 150px;
+    height: 120px;
+    background-color: #58666e;
+}
+#tsss{
+	position: absolute;
+    left: 360px;
+    top: 20px;
+    width: 150px;
+    height: 130px;
+    background-color: #58666e;
+}
+#dts{
+	position: absolute;
+    left: 360px;
+    top: 160px;
+    width: 150px;
+    height: 120px;
+    background-color: #58666e;
+}
+#dss{
+	position: absolute;
+    left: 360px;
+    top: 290px;
+    width: 150px;
+    height: 110px;
+    background-color: #58666e;
+}
+#oms{
+	position: absolute;
+    left: 520px;
+    top: 20px;
+    width: 150px;
+    height: 380px;
+    background-color: #58666e;
+}
+#dss-trans{
+	position: absolute;
+    left: 680px;
+    top: 160px;
+    width: 150px;
+    height: 120px;
+    background-color: #58666e;
+}
+.sub_sys{
+	color:white
+}
+.sub_sys div{
+	color:white
+}
+.sub_sys span{
+	color:white
+}
+</style>
+</html>

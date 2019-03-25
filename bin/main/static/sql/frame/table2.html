@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/plugin/bootstrap-table/bootstrap-table.min.css">
+
+	<body>
+		<table id="table"></table>
+
+	</body>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/bootstrap/bootstrap.min.js"></script>
+	<script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+
+	<script src="../js/bootstrap-table-zh-CN.min.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$('#table').bootstrapTable({
+				url: '../data/data1.json',
+				columns: [{
+					field: 'id',
+					title: 'Item ID'
+				}, {
+					field: 'name',
+					title: 'Item Name'
+				}, {
+					field: 'price',
+					title: 'Item Price'
+				}, ]
+			});
+
+		})
+	</script>
+
+</html>

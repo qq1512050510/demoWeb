@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<link href="../css/plugin/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="../css/animate.min.css" rel="stylesheet">
+		<link href="../css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="../css/plugin/bootstrapValidator/bootstrapValidator.min.css" />
+		<link rel="stylesheet" href="../css/style.min.css" />
+		
+	</head>
+
+	<body>
+
+			<table id="finishingTask" data-toggle="table" data-url="../data/checkingTask.json" 
+				data-click-to-select="true" 
+				data-search="true" 
+				data-show-refresh="true" 
+				data-show-toggle="true" 
+				data-show-columns="true" 
+				data-toolbar="#toolbar" 
+				data-query-params="queryParams" 
+				data-pagination="true" 
+				data-halign="center">
+
+				<thead>
+					<tr>
+						<th data-field="state" data-checkbox="true"></th>
+						<th data-align="center" data-field="superviseID" class="col-sm-1">ID</th>
+						<th data-field="superviseName">未完成任务</th>
+						<th data-formatter="operateBtn" data-events="operateEvents" class="col-md-2">评价</th>
+					</tr>
+				</thead>
+			</table>
+
+	</body>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	<script src="../js/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../js/plugins/bootstrapValidator/bootstrapValidator.min.js"></script>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<link href="../css/plugin/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="../css/animate.min.css" rel="stylesheet">
+		<link href="../css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="../css/plugin/bootstrapValidator/bootstrapValidator.min.css" />
+		<link rel="stylesheet" href="../css/style.min.css" />
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+		<script src="../js/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+		<script src="../js/plugins/bootstrapValidator/bootstrapValidator.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var colArray = [];
+				colArray = [{
+					field: 'innerid',
+					title: '编号'
+				}, {
+					field: 'nameS',
+					title: '卫星型号'
+				}, {
+					field: 'timeT',
+					title: '时间'
+				}, {
+					field: 'dtsTask',
+					title: 'DTS任务'
+				}, {
+					field: 'dtsTaskC',
+					title: '完成'
+				}, {
+					field: 'dtsTaskR',
+					title: '完成率'
+				}, {
+					field: 'omsTask',
+					title: 'OMS任务'
+				}, {
+					field: 'omsTaskC',
+					title: '完成'
+				}, {
+					field: 'omsTaskR',
+					title: '完成率'
+				}, {
+					field: 'disTask',
+					title: 'DIS任务'
+				}, {
+					field: 'disTaskC',
+					title: '完成'
+				}, {
+					field: 'disTaskR',
+					title: '完成率'
+				}, {
+					field: 'pgsTask',
+					title: 'PGS任务'
+				}, {
+					field: 'pgsTaskC',
+					title: '完成'
+				}, {
+					field: 'pgsTaskR',
+					title: '完成率'
+				}];
+
+				$('#table').bootstrapTable({
+					url: '../data/table_ribao.json',
+					columns: colArray
+				});
+				var currentDate = new Date();
+				var titleContent = "资源卫星 " + currentDate.getFullYear() + "年" + (currentDate.getMonth() + 1) + "月" + currentDate.getDate() + "号报表";
+				$('#titleH').html(titleContent);
+			})
+		</script>
+	</head>
+
+	<body style="overflow:hidden;">
+		<div id="" style="margin-left: 50px;margin-right: 50px;margin-top:25px ;">
+
+			<div style="text-align: center; border: 1px #ddd solid;">
+				<h1 id="titleH">资源卫星 2018年4月23号报表</h1></div>
+			<div style="">
+				<table id="table" style=""></table>
+			</div>
+			<div style="text-align: right;"> <input type="button" value="报表打印" onclick="window.print();"></div>
+		</div>
+	</body>
+
+</html>

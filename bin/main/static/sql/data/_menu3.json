@@ -1,0 +1,122 @@
+{
+	"menus": [
+		{
+			"menuid": "1",
+			"icon": "fa-home",
+			"menuname": "SQL管理",
+			"collapsible": "true",
+			"menuUrl": "frame/tableSql.html",
+			"alarmCount":0,
+			"menuLevel": "1",
+			"state": "closed",
+			"menus": []
+		}, {
+			"menuid": "2",
+			"icon": "fa-flask",
+			"menuname": "综合查询",
+			"collapsible": "true",
+			"menuUrl": "#",
+			"alarmCount":0,
+			"menuLevel": "1",
+			"state": "closed",
+			"menus": [
+				{
+					"menuid": "21",
+					"menuname": "接受数据查询",
+					"menuUrl": "frame/table3.html",
+					"icon": "icon-nav"
+				}, {
+					"menuid": "22",
+					"menuname": "处理任务查询",
+					"menuUrl": "#",
+					"icon": "icon-nav"
+				}, {
+					"menuid": "23",
+					"menuname": "数据产品查询",
+					"menuUrl": "#",
+					"icon": "icon-nav"
+				}
+			]
+		}, {
+			"menuid": "3",
+			"icon": "fa-check-square-o",
+			"menuname": "统计分析",
+			"collapsible": "true",
+			"menuUrl": "#",
+			"alarmCount":0,
+			"menuLevel": "1",
+			"state": "closed",
+			"menus": [
+			{
+					"menuid": "31",
+					"menuname": "接收任务统计",
+					"menuUrl": "frame/table8.html",
+					"icon": "icon-nav"
+				}, {
+					"menuid": "32",
+					"menuname": "处理任务统计",
+					"menuUrl": "#",
+					"icon": "icon-nav"
+				}, {
+					"menuid": "33",
+					"menuname": "数据产品统计",
+					"menuUrl": "#",
+					"icon": "icon-nav"
+				}, {
+					"menuid": "34",
+					"menuname": "接收计划统计",
+					"menuUrl": "#",
+					"icon": "icon-nav"
+				}, {
+					"menuid": "35",
+					"menuname": "产品订单统计",
+					"menuUrl": "#",
+					"icon": "icon-nav"
+				}, {
+					"menuid": "36",
+					"menuname": "用户服务统计",
+					"menuUrl": "#",
+					"icon": "icon-nav"
+				}
+				]
+		}, {
+			"menuid": "4",
+			"icon": "fa-flask",
+			"menuname": "报告报表",
+			"collapsible": "true",
+			"menuUrl": "#",
+			"alarmCount":0,
+			"menuLevel": "1",
+			"state": "closed",
+			"menus": [
+				{
+					"menuid": "41",
+					"menuname": "运行分析日报",
+					"menuUrl": "frame/table9.html",
+					"icon": "icon-nav"
+				}, {
+					"menuid": "42",
+					"menuname": "运行分析周报",
+					"menuUrl": "#",
+					"icon": "icon-nav"
+				}, {
+					"menuid": "42",
+					"menuname": "运行分析月报",
+					"menuUrl": "#",
+					"icon": "icon-nav"
+				}
+			]
+		}, {
+			"menuid": "5",
+			"icon": "fa-check-square-o",
+			"menuname": "业务运行监控",
+			"collapsible": "true",
+			"menuUrl": "monitor.html",
+			"alarmCount":0,
+			"menuLevel": "1",
+			"state": "closed",
+			"menus": []
+		}
+		
+	]
+}

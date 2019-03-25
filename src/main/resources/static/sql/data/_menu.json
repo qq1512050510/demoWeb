@@ -1,0 +1,46 @@
+{
+	"menus": [
+		{
+			"menuid": "1",
+			"icon": "fa-database",
+			"menuname": "数据源管理",
+			"collapsible": "true",
+			"menuUrl": "frame/tableConnector.html",
+			"alarmCount":0,
+			"menuLevel": "1",
+			"state": "closed",
+			"menus": []
+		}, {
+			"menuid": "2",
+			"icon": "fa-home",
+			"menuname": "SQL查询",
+			"collapsible": "true",
+			"menuUrl": "frame/tableSql.html",
+			"alarmCount":0,
+			"menuLevel": "1",
+			"state": "closed",
+			"menus": []
+		}, {
+			"menuid": "3",
+			"icon": "fa-home",
+			"menuname": "SQL导入",
+			"collapsible": "true",
+			"menuUrl": "frame/tableSqlImport.html",
+			"alarmCount":0,
+			"menuLevel": "1",
+			"state": "closed",
+			"menus": []
+		}, {
+			"menuid": "4",
+			"icon": "fa-check-square-o",
+			"menuname": "运行状态监控",
+			"collapsible": "true",
+			"menuUrl": "../druid/login.html",
+			"alarmCount":0,
+			"menuLevel": "1",
+			"state": "closed",
+			"menus": []
+		}
+		
+	]
+}

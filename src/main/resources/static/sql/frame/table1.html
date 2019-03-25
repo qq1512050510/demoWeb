@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+	    <link href="../css/plugin/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	    <link href="../css/animate.min.css" rel="stylesheet">
+	    <link href="../css/font-awesome.min.css" rel="stylesheet">
+	    <link rel="stylesheet" href="../css/plugin/bootstrapValidator/bootstrapValidator.min.css"/>
+	    <link rel="stylesheet" href="../css/style.min.css" />
+	</head>
+	<body>
+		<table id="table" style=""></table>
+	</body>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../js/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../js/plugins/bootstrapValidator/bootstrapValidator.min.js"></script>
+    <script type="text/javascript">
+		$(function() {
+			$('#table').bootstrapTable({
+				url: '../data/table_asp.json',
+				columns: [{
+					field: 'innerid',
+					title: 'Item ID'
+				}, {
+					field: 'name',
+					title: 'Item Name'
+				}, {
+					field: 'sql_statement',
+					title: 'Item Price'
+				}, ]
+			});
+
+		})
+	</script>   
+</html>

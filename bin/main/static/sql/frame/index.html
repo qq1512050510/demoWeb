@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<title>产品制作</title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap/bootstrap.min.js"></script>
+
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<!--<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">-->
+		<!--bootstrap-tab样式-->
+		<!--<link rel="stylesheet" href="css/boobootstrap-tab.css"> 
+
+		<script src="js/bootstrap-tab.js"></script>-->
+		
+		
+		<script type="text/javascript">
+			$("#tabContainer").tabs({
+				data: [{
+					id: 'home',
+					text: '百度一下',
+					url: "tab_first.html",
+					closeable: true
+				}, {
+					id: 'admineap',
+					text: 'AdminEAP',
+					url: "tab_second.html"
+				}, {
+					id: 'edit',
+					text: '编辑人员',
+					url: "tab_content.html",
+					closeable: true
+				}],
+				showIndex: 1,
+				loadAll: false
+			})
+
+			$("#tabContainer").data("tabs").addTab({
+				id: 'test',
+				text: 'addTab',
+				closeable: true,
+				url: 'tab_content.html'
+			})
+		</script>
+	</head>
+
+	</body>
+	<div id="tabContainer"></div>
+
+	<body>
+
+</html>

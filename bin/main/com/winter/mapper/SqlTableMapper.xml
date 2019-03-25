@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.winter.mapper.SqlTableMapper">
+  <resultMap id="BaseResultMap" type="com.winter.model.SqlTable">
+    <result column="sqlId" jdbcType="VARCHAR" property="sqlid" />
+    <result column="sqlContent" jdbcType="VARCHAR" property="sqlcontent" />
+    <result column="sqlDetails" jdbcType="VARCHAR" property="sqldetails" />
+    <result column="t_sort_sortId" jdbcType="INTEGER" property="tSortSortid" />
+    <result column="sqlSort" jdbcType="VARCHAR" property="sqlsort" />
+    <result column="sqlOrder" jdbcType="VARCHAR" property="sqlorder" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <select id="selectSqlBySortId"  parameterType="java.lang.Integer" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t_sql
+	where t_sort_sortId = #{sortId,jdbcType=INTEGER}
+	ORDER BY CAST(sqlOrder AS DECIMAL) ASC
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_sql
+  </select>
+  <sql id="Base_Column_List">
+    sqlId, sqlContent, sqlDetails, t_sort_sortId, sqlSort ,sqlOrder
+  </sql>
+  <select id="selectByExample" parameterType="com.winter.model.SqlTableExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_sql
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+     	<if test="orderByClause != 'sqlOrder'">
+     	 	order by ${orderByClause}
+    	</if>
+     	<if test="orderByClause == 'sqlOrder'">
+     		 ORDER BY CAST(${orderByClause} AS DECIMAL) ASC
+    	</if>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.winter.model.SqlTableExample">
+    delete from t_sql
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.winter.model.SqlTable">
+    insert into t_sql (sqlId, sqlContent, sqlDetails, 
+      t_sort_sortId, sqlSort,sqlOrder)
+    values (#{sqlid,jdbcType=VARCHAR}, #{sqlcontent,jdbcType=VARCHAR}, #{sqldetails,jdbcType=VARCHAR}, 
+      #{tSortSortid,jdbcType=INTEGER}, #{sqlsort,jdbcType=VARCHAR}, #{sqlorder,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.winter.model.SqlTable">
+    insert into t_sql
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sqlid != null">
+        sqlId,
+      </if>
+      <if test="sqlcontent != null">
+        sqlContent,
+      </if>
+      <if test="sqldetails != null">
+        sqlDetails,
+      </if>
+      <if test="tSortSortid != null">
+        t_sort_sortId,
+      </if>
+      <if test="sqlsort != null">
+        sqlSort,
+      </if>
+      <if test="sqlorder != null">
+        sqlOrder,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sqlid != null">
+        #{sqlid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlcontent != null">
+        #{sqlcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="sqldetails != null">
+        #{sqldetails,jdbcType=VARCHAR},
+      </if>
+      <if test="tSortSortid != null">
+        #{tSortSortid,jdbcType=INTEGER},
+      </if>
+      <if test="sqlsort != null">
+        #{sqlsort,jdbcType=VARCHAR},
+      </if>
+      <if test="sqlorder != null">
+        #{sqlorder,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.winter.model.SqlTableExample" resultType="java.lang.Long">
+    select count(*) from t_sql
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_sql
+    <set>
+      <if test="record.sqlid != null">
+        sqlId = #{record.sqlid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqlcontent != null">
+        sqlContent = #{record.sqlcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqldetails != null">
+        sqlDetails = #{record.sqldetails,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSortSortid != null">
+        t_sort_sortId = #{record.tSortSortid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sqlsort != null">
+        sqlSort = #{record.sqlsort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqlorder != null">
+        sqlorder = #{record.sqlorder,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_sql
+    set sqlId = #{record.sqlid,jdbcType=VARCHAR},
+      sqlContent = #{record.sqlcontent,jdbcType=VARCHAR},
+      sqlDetails = #{record.sqldetails,jdbcType=VARCHAR},
+      t_sort_sortId = #{record.tSortSortid,jdbcType=INTEGER},
+      sqlSort = #{record.sqlsort,jdbcType=VARCHAR},
+      sqlOrder = #{record.sqlOrder,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
