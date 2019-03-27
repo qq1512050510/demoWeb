@@ -6,6 +6,18 @@ server:
 logging:
   level: 
     learning: trace
+    com.dy.springboot.server.mapper: debug
+    #关闭 CONDITIONS EVALUATION REPORT
+    org.springframework.boot.autoconfigure: ERROR 
+    root: info
+    org:
+      springframework.web: DEBUG
+      mybatis: DEBUG
+    path: ./logs
+    file: demo.log
+#logback
+debug: true    
+
    
 spring:
     datasource:
