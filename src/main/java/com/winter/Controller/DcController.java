@@ -2,37 +2,24 @@ package com.winter.Controller;
 
 import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.github.pagehelper.PageInfo;
-import com.winter.form.AnimalForm;
-import com.winter.form.SqlForm;
-import com.winter.model.Animal;
 import com.winter.model.ConnectorTable;
-import com.winter.model.SqlTable;
-import com.winter.model.User;
 import com.winter.pagefilter.PageFilterBoot;
 import com.winter.service.DbConnectService;
-import com.winter.service.SqlService;
 import com.winter.utils.MapEntityConverse;
 
 /**
@@ -50,7 +37,7 @@ public class DcController {
     public void getAllSql(){
         //从数据库取出数据
     	try {
-			Connection connect = dbService.getConnection();
+			//Connection connect = dbService.getConnection();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,7 +62,7 @@ public class DcController {
     	{
     		pageSize = Integer.parseInt((String) paras.get("ps"));
     	}
-    	PageFilterBoot<ConnectorTable> pageFilter = new PageFilterBoot(dbService.findSqlPageFilter(pageNum,pageSize));
+    	PageFilterBoot<ConnectorTable> pageFilter = new PageFilterBoot<ConnectorTable>(dbService.findSqlPageFilter(pageNum,pageSize));
         return pageFilter;
     }
     @ResponseBody
@@ -130,8 +117,8 @@ public class DcController {
 			dbService.editSelective(connectorTable);
 			return connectorTableMap;
 		}
-	 	@SuppressWarnings("unchecked")
-		@ResponseBody
+	 	
+	 	@ResponseBody
 	 	@PostMapping("/deleteDbByIds")
 	 	public Map<String, Object> deleteDbByIds(@RequestParam Map<String, Object> connectorIdsMap){
 	 		

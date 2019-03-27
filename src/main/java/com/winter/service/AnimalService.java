@@ -2,8 +2,7 @@ package com.winter.service;
 
 import java.util.List;
 
-import com.winter.model.Animal;
-import com.winter.model.AnimalEntity;  
+import com.winter.model.Animal;  
   
 public interface AnimalService {  
   

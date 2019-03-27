@@ -1,14 +1,13 @@
 package com.winter.service.impl;
 
 
-import java.util.List;  
-  
-import org.springframework.beans.factory.annotation.Autowired;  
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.winter.mapper.AnimalMapper;
 import com.winter.model.Animal;
-import com.winter.model.AnimalEntity;
 import com.winter.service.AnimalService;  
   
   

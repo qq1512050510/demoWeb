@@ -125,7 +125,7 @@ public class MysqlWFTools {
 	/**
 	 * $ 替换的ID Map
 	 */
-	private static Map<String, String> idReplaceMap = new HashMap();
+	private static Map<String, String> idReplaceMap = new HashMap<String, String>();
 	static {
 		delTabName.add("wfgraphpackage");
 		delTabName.add("wfprocessgraph");
@@ -355,8 +355,6 @@ public class MysqlWFTools {
 			System.out.println(sql);
 			String tableName = getTableName(sql);
 			if (delTabName.contains(tableName)) {
-				String delSql = sql;
-				//outSqlList.add(delSql.replace("select *", "delete"));
 			}
 			conn = dbConnect(sourceDb);
 			ps = conn.prepareStatement(sql);
@@ -569,7 +567,7 @@ public class MysqlWFTools {
 		}
 	}
 
-	private static void constructMapByNameValue(String columnName,
+	/*private static void constructMapByNameValue(String columnName,
 			String columnValue) {
 		for (String keyString : keyList) {
 			if (keyString.equals(columnName)) {
@@ -582,12 +580,12 @@ public class MysqlWFTools {
 			}
 
 		}
-	}
+	}*/
 
 	// $构造替换map并且返回替换后的value
 	private static List<String> replaceIdByMap(List<String> sqlList) {
 		int i = 0;
-		List<String> sqlListTemp = new ArrayList();
+		List<String> sqlListTemp = new ArrayList<String>();
 		for (String sqlString : sqlList) {
 			sqlListTemp.add(sqlString);
 			for (String keyString : idReplaceMap.keySet()) {
@@ -607,7 +605,7 @@ public class MysqlWFTools {
 	// $构造替换jobList并且返回替换后的value
 	private static List<TableJob> replacejobListIdByMap(List<TableJob> jobList) {
 		int i = 0;
-		List<TableJob> jobListTemp = new ArrayList();
+		List<TableJob> jobListTemp = new ArrayList<TableJob>();
 		for (TableJob jobFor : jobList) {
 			jobListTemp.add(jobFor);
 			for (String keyString : idReplaceMap.keySet()) {
@@ -630,7 +628,7 @@ public class MysqlWFTools {
 	}
 
 	// $构造替换map并且返回替换后的value
-	private static StringBuffer constructMapAndReplaceValue(
+	/*private static StringBuffer constructMapAndReplaceValue(
 			StringBuffer columnName, StringBuffer columnValue) {
 
 		String columnValueString = columnValue.toString();
@@ -664,19 +662,19 @@ public class MysqlWFTools {
 		// System.out.println(columnValueString+"\n");
 		return new StringBuffer(columnValueString);
 
-	}
+	}*/
 
 	// $根据主键MAP替换大字段list
-	private static void constructBlobList() {
+/*	private static void constructBlobList() {
 		for (TableJob jobListfor : jobList) {
 			Map<String, InputStream> blobsFor = jobListfor.blobs;
-			Iterator bolbsForIt = (Iterator) blobsFor.keySet();
+			Iterator<?> bolbsForIt = (Iterator<?>) blobsFor.keySet();
 			while (bolbsForIt.hasNext()) {
-				String bolbskeyString = (String) bolbsForIt.next();
+				//String bolbskeyString = (String) bolbsForIt.next();
 			}
 		}
 
-	}
+	}*/
 
 	/**
 	 * 把sql输出的文件

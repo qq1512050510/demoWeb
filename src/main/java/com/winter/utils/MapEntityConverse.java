@@ -1,7 +1,5 @@
 package com.winter.utils;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;

@@ -1,4 +1,4 @@
-package com.winter.configuration;
+package com.winter.component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

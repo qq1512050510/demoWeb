@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import com.winter.model.ConnectorTable;
-import com.winter.model.SqlTable;
 
 /**
  * Created by Administrator on 2018/5/29.

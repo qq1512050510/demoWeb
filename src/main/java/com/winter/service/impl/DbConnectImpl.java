@@ -19,7 +19,6 @@ import com.winter.config.bean.Config;
 import com.winter.mapper.ConnectorTableMapper;
 import com.winter.model.ConnectorTable;
 import com.winter.model.ConnectorTableExample;
-import com.winter.model.SqlTable;
 import com.winter.service.DbConnectService;
 
 /**

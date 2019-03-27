@@ -1,17 +1,13 @@
 package com.winter.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.winter.mapper.ConnectorTableMapper;
-import com.winter.mapper.SqlTableMapper;
-import com.winter.mapper.UserMapper;
-import com.winter.model.ConnectorTable;
-import com.winter.model.ConnectorTableExample;
-import com.winter.model.SqlTable;
-import com.winter.model.SqlTableExample;
-import com.winter.model.User;
-import com.winter.service.SqlService;
-import com.winter.utils.MysqlWFToolsOnline;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +15,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.winter.mapper.ConnectorTableMapper;
+import com.winter.mapper.SqlTableMapper;
+import com.winter.model.ConnectorTable;
+import com.winter.model.ConnectorTableExample;
+import com.winter.model.SqlTable;
+import com.winter.model.SqlTableExample;
+import com.winter.service.SqlService;
+import com.winter.utils.MysqlWFToolsOnline;
 
 /**
  * Created by Administrator on 2017/8/16.
@@ -75,7 +72,7 @@ public class SqlServiceImpl implements SqlService {
     }
 
 	@Override
-	public PageInfo findSqlPageFilter(int pageNum, int pageSize) {
+	public PageInfo<SqlTable> findSqlPageFilter(int pageNum, int pageSize) {
 		//将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageNum,pageSize);
         //startPage后紧跟的这个查询就是分页查询  
@@ -140,7 +137,7 @@ public class SqlServiceImpl implements SqlService {
 	public static boolean execInsertSql(List<String> sqlList,ConnectorTable connectAtt) throws SQLException {
 		Connection conn = null;
 		Statement st = null;
-		PreparedStatement ps = null;
+		//PreparedStatement ps = null;
 		/*tring[] targetDb = {
 				"com.mysql.jdbc.Driver",
 				"jdbc:mysql://172.15.100.151:3306/adp?useUnicode=true&amp;characterEncoding=utf8&amp;noAccessToProcedureBodies=true",

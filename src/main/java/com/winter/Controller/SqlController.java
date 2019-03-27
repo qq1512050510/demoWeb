@@ -48,7 +48,7 @@ public class SqlController {
     @RequestMapping(path = "/list", params = {"save"}, method = RequestMethod.POST, produces = {"application/json;charset=UTF-8"})
     public ModelAndView doAdd(Model model, @Valid SqlTable sqlTable, BindingResult result){
     	ModelAndView mav = new ModelAndView();
-    	PageInfo sqlPageInfo = new PageInfo();
+    	PageInfo<SqlTable> sqlPageInfo = new PageInfo<SqlTable>();
     	System.out.println(result);
         if(result.hasErrors()){
         	mav.addObject("MSG", "出错啦！");
@@ -110,14 +110,14 @@ public class SqlController {
     	{
     		pageSize = Integer.parseInt((String) paras.get("ps"));
     	}
-    	PageFilterBoot<SqlTable> pageFilter = new PageFilterBoot(sqlService.findSqlPageFilter(pageNum,pageSize));
+    	PageFilterBoot<SqlTable> pageFilter = new PageFilterBoot<SqlTable>(sqlService.findSqlPageFilter(pageNum,pageSize));
         return pageFilter;
     }
     
     @RequestMapping(value = "/getPagefilter/{pageNum}/{pageSize}", produces = {"application/json;charset=UTF-8"})
     public ModelAndView getPagefilter(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize){
         //从数据库取出数据
-        PageInfo sqlPageInfo = sqlService.findSqlPageFilter(pageNum,pageSize);
+        PageInfo<?> sqlPageInfo = sqlService.findSqlPageFilter(pageNum,pageSize);
         ModelAndView mav = new ModelAndView();
         mav.setViewName("sqllist");
         mav.addObject("sqlForm", new SqlTable());
@@ -135,13 +135,13 @@ public class SqlController {
     	{
     		pageSize = Integer.parseInt((String) paras.get("ps"));
     	}
-    	PageFilterBoot<SqlTable> pageFilter = new PageFilterBoot(sqlService.findSqlPageFilterAndImportOrNot(pageNum,pageSize,importOrNot));
+    	PageFilterBoot<SqlTable> pageFilter = new PageFilterBoot<SqlTable>(sqlService.findSqlPageFilterAndImportOrNot(pageNum,pageSize,importOrNot));
         return pageFilter;
     }
     @RequestMapping(value = "/selectSqlTableBySortId", produces = {"application/json;charset=UTF-8"})
     public PageFilterBoot<SqlTable> selectSqlTableBySortId(@RequestParam Map<String, Object> paras){
     	String sortId = (String) paras.get("sortId");
-    	PageFilterBoot<SqlTable> pageFilter = new PageFilterBoot(sqlService.findSqlPageFilterBySortId(sortId));
+    	PageFilterBoot<SqlTable> pageFilter = new PageFilterBoot<SqlTable>(sqlService.findSqlPageFilterBySortId(sortId));
     	return pageFilter;
     }
     //把form里的数据copy到entity中
@@ -171,7 +171,6 @@ public class SqlController {
   	@PostMapping("/executeSql")
   	public Map<String, Object> executeSql(@RequestParam Map<String, Object> attributeMap){
   		
-  		SqlTable sqlTable = new SqlTable();
   		Map<String, Object> returnMap = new HashMap<String,Object>();
   		String sqlId  = (String) attributeMap.get("sqlid");
   		String dbSourceId = (String) attributeMap.get("dbSourceId");
@@ -207,7 +206,6 @@ public class SqlController {
   	@PostMapping("/executeSqlBysortId")
   	public Map<String, Object> executeSqlBysortId(@RequestParam Map<String, Object> attributeMap){
   		
-  		SqlTable sqlTable = new SqlTable();
   		Map<String, Object> returnMap = new HashMap<String,Object>();
   		String sortId  = (String) attributeMap.get("sortId");
   		String dbSourceId = (String) attributeMap.get("dbSourceId");
@@ -227,7 +225,6 @@ public class SqlController {
   	@PostMapping("/exportSql")
   	public Map<String, Object> exportSql(@RequestParam Map<String, Object> attributeMap){
   		
-  		SqlTable sqlTable = new SqlTable();
   		Map<String, Object> returnMap = new HashMap<String,Object>();
   		String sqlId  = (String) attributeMap.get("sqlid");
   		String dbSourceId = (String) attributeMap.get("dbSourceId");
@@ -247,7 +244,6 @@ public class SqlController {
  	@PostMapping("/executeSqlBySqlIdAndDBSourceId")
   	public Map<String, Object> executeSqlBySqlIdAndDBSourceId(@RequestParam Map<String, Object> attributeMap){
   		
-  		SqlTable sqlTable = new SqlTable();
   		Map<String, Object> returnMap = new HashMap<String,Object>();
   		String sqlId  = (String) attributeMap.get("sqlId");
   		String dbSourceId = (String) attributeMap.get("dbSourceId");
